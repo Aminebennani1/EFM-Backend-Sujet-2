@@ -1,168 +1,66 @@
-# 🧪 **Laravel Assessment – Day 2: Product Catalog with Dynamic Alerts**
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-## 🧩 **General Context**
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-You need to develop an **autonomous and modular Laravel module** named `PkgProduit`, placed inside the `modules/` folder.
+## About Laravel
 
-This module allows you to:
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
--   Manage a **product catalog** (name, price, stock).
--   Store **dynamic business rules** (saved in the database as expressions).
--   Evaluate these rules **dynamically using a `RuleEngine` class**.
--   Display only **alerted products** in a **dashboard widget**.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
----
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## 🛠️ **Mandatory Technical Constraint**
+## Learning Laravel
 
-The project must follow a **modular Laravel architecture** with the following structure:
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-```
-modules/
-└── PkgProduit/
-    ├── Controllers/
-    ├── Models/
-    ├── Views/
-    ├── App/
-    │   ├── Services/
-    │   └── Requests/
-    └── lang/
-```
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-The module must be **declared via a custom Service Provider**.
-All business logic must remain within the module.
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
----
+## Laravel Sponsors
 
-## ❗️**Condition for Accessing the Next Section**
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
--   If you score **at least 4/5** in Section 1, you proceed.
--   Otherwise, you restart with a **new topic**. Your initial score (out of 5) remains, and the remaining parts will be graded out of 35.
+### Premium Partners
 
----
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-## 🧾 Logical Data Model (LDM)
+## Contributing
 
-| Table        | Fields                                         |
-| ------------ | ---------------------------------------------- |
-| **produits** | id, name, stock, price, created_at, updated_at |
-| **rules**    | id, label, expression (type `text`)            |
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
----
+## Code of Conduct
 
-# 📁 **Section 1 – Prototype: Dynamic Rule Engine**
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-📖 _Documentation allowed_
+## Security Vulnerabilities
 
-### 🧮 Maximum Score: 5 points
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-### ⏱️ Duration: 30 minutes
+## License
 
-### 🎯 Objective:
-
-Implement a `RuleEngine` class capable of dynamically evaluating a business rule (expressed as text) against a product.
-
-### 🔹 Tasks:
-
-#### Q1.1 – Create a `RuleEngine` class with a method:
-
-```php
-public function evaluate(string $expression, array $data): bool
-```
-
-**(2 pts)**
-
-#### Q1.2 – Simulate a product (e.g., `['stock' => 2, 'price' => 150]`), apply a rule (e.g., `stock < 5 && price > 100`), and display the result in a simple view.
-
-**(3 pts)**
-
----
-
-# 📁 **Section 2 – Creating & Paginated Display of Products**
-
-### 🧮 Maximum Score: 10 points
-
-### ⏱️ Duration: 1 hour
-
-### 🎯 Objective:
-
-Allow users to add products via an **AJAX modal form** and display stored products with **pagination**.
-
-### 🔹 Tasks:
-
-#### Q2.1 – Create the `Produit` model, its migration, and the controller within the module.
-
-**(2 pts)**
-
-#### Q2.2 – Create a view with an "Add Product" button → Opens a modal containing the form.
-
-**(2 pts)**
-
-#### Q2.3 – Submit the form via AJAX and display validation errors inside the modal.
-
-**(3 pts)**
-
-#### Q2.4 – Display products in a **paginated table (10 per page)**, sorted by creation date (descending).
-
-**(3 pts)**
-
----
-
-# 📁 **Section 3 – Dashboard with Dynamic Alert Widget**
-
-### 🧮 Maximum Score: 25 points
-
-### ⏱️ Duration: 1 hour 30 minutes
-
-### 🎯 Objective:
-
-Create a **responsive dashboard** with a **widget** displaying only **alerted products**—i.e., those that match **at least one business rule**.
-
-### 🔹 Tasks:
-
-#### Q3.1 – Create the `rules` table with a migration and model, and insert **at least two rules** (with explicit labels).
-
-**(3 pts)**
-
-#### Q3.2 – Implement an `AlertService` with a public method:
-
-```php
-public function getProduitsEnAlerte(): Collection
-```
-
-This method should:
-
--   Retrieve all products.
--   Retrieve all rules.
--   Dynamically apply each rule to each product using `RuleEngine`.
--   Return only the products for which **at least one rule evaluates to true**.
-    **(8 pts)**
-
-#### Q3.3 – Create a `dashboard.blade.php` view containing a **widget** (styled card or block) displaying the list of alerted products.
-
-**(7 pts)**
-
-#### Q3.4 – Handle all `RuleEngine` evaluation errors:
-
--   Invalid expressions (e.g., `stock => 5`).
--   Missing variables (`price`, `stock`, etc.).
--   Non-boolean results.
-    Display clean error messages without breaking the interface.
-    **(7 pts)**
-
-#### Q3.5 – Ensure the dashboard interface is **responsive and works on both PC and mobile** (Bootstrap recommended).
-
-**(2 pts)**
-
----
-
-## ✅ **Grading Summary**
-
-| Section   | Description                                  | Score   |
-| --------- | -------------------------------------------- | ------- |
-| Section 1 | Prototype – Dynamic Rule Engine              | /5      |
-| Section 2 | Product Creation (AJAX + modal) + Pagination | /10     |
-| Section 3 | Dashboard with Dynamic Alert Widget          | /25     |
-| **Total** |                                              | **/40** |
-
----
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
